@@ -1,3 +1,4 @@
+// src/components/Button.jsx
 const Button = ({ text, onClick }) => {
   return (
     <button
@@ -9,4 +10,4 @@ const Button = ({ text, onClick }) => {
   );
 };
 
-export default Button;
+export default Button; // Default export
