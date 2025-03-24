@@ -35,6 +35,9 @@ const Checkout = () => {
     console.log('Order submitted:', formData);
     console.log('Cart items:', cart);
 
+    // Store order details in localStorage for now
+    localStorage.setItem('order', JSON.stringify({ ...formData, cart }));
+
     // Redirect to Order Confirmation page after submission
     navigate('/order-confirmation');
     
