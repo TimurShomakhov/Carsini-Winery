@@ -6,6 +6,8 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout'; // Import Checkout Page
 import OrderConfirmation from './pages/OrderConfirmation'; // Import Order Confirmation Page
+import Signup from './components/Signup'; // Import Signup component
+import Login from './components/Login'; // Import Login component
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} /> {/* Add the Checkout Route */}
         <Route path="/order-confirmation" element={<OrderConfirmation />} /> {/* Add Order Confirmation Route */}
+        <Route path="/signup" element={<Signup />} />  {/* Signup Route */}
+        <Route path="/login" element={<Login />} />    {/* Login Route */}
       </Routes>
     </Router>
   );
