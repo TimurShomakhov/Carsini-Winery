@@ -1,27 +1,25 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Home';  // Corrected import
 import ProductListing from './pages/ProductListing';
-import ProductDetails from './pages/ProductDetails'; // Import the ProductDetails page
+import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import AboutUs from './pages/AboutUs';
-import { CartProvider } from './context/CartContext'; // Import CartProvider
+import Checkout from './pages/Checkout'; // Import Checkout Page
+import OrderConfirmation from './pages/OrderConfirmation'; // Import Order Confirmation Page
 
-function App() {
+const App = () => {
   return (
-    <CartProvider> {/* Wrap the whole app with CartProvider */}
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<ProductListing />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<Cart />} /> {/* Add the Cart route */}
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/about" element={<AboutUs />} />
-        </Routes>
-      </Router>
-    </CartProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />  {/* Use correct component name */}
+        <Route path="/products" element={<ProductListing />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} /> {/* Add the Checkout Route */}
+        <Route path="/order-confirmation" element={<OrderConfirmation />} /> {/* Add Order Confirmation Route */}
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
