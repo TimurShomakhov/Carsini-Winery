@@ -1,18 +1,38 @@
-import React from 'react';
+import ProductCard from '../components/ProductCard';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
+const products = [
+  {
+    id: 1,
+    name: 'Red Wine',
+    description: 'A fine red wine from the best vineyards.',
+    price: 19.99,
+    image: 'https://via.placeholder.com/300x200',
+  },
+  {
+    id: 2,
+    name: 'White Wine',
+    description: 'A refreshing white wine for every occasion.',
+    price: 15.99,
+    image: 'https://via.placeholder.com/300x200',
+  },
+  // Add more products as needed
+];
 
 const ProductListing = () => {
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Our Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="border rounded-lg p-4">
-          <img src="wine-image.jpg" alt="Wine Bottle" className="w-full h-64 object-cover mb-4" />
-          <h3 className="text-xl font-semibold">Red Wine</h3>
-          <p className="text-gray-600">A rich and smooth red wine perfect for dinner parties.</p>
-          <button className="bg-primary text-white mt-2 px-4 py-2 rounded-md">Add to Cart</button>
+    <div>
+      <Navbar />
+      <main className="p-4">
+        <h1 className="text-3xl font-bold text-center mb-8">Our Products</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
-        {/* Repeat for other products */}
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };
