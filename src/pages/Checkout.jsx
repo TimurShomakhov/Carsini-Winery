@@ -1,6 +1,8 @@
+// src/pages/Checkout.jsx
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext'; // Import CartContext hook
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
+import StripeCheckout from '../components/StripeCheckout'; // Updated import path
 
 const Checkout = () => {
   const { cart } = useCart(); // Get the cart items from the context
@@ -65,7 +67,7 @@ const Checkout = () => {
       </div>
 
       {/* Checkout form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 mb-4">
         <div>
           <label className="block text-sm font-semibold" htmlFor="name">
             Name:
@@ -116,6 +118,9 @@ const Checkout = () => {
           </button>
         </div>
       </form>
+
+      {/* Stripe checkout component */}
+      <StripeCheckout totalAmount={totalPrice} />
     </div>
   );
 };
