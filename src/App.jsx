@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import ProductListing from './pages/ProductListing';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import About from './pages/About';
+import AboutUs from './pages/AboutUs';  {/* Corrected import */}
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Route path="/products" element={<ProductListing />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<AboutUs />} /> {/* Corrected usage */}
       </Routes>
     </Router>
   );
