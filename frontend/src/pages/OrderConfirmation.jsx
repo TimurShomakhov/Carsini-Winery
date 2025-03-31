@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // For redirecting
-import { useCart } from '../context/CartContext'; // Import CartContext hook
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 
 const OrderConfirmation = () => {
-  const { cart } = useCart();
-  const [orderDetails, setOrderDetails] = useState(null);
-  const navigate = useNavigate();
+  const { cart } = useCart()
+  const [orderDetails, setOrderDetails] = useState(null)
+  const navigate = useNavigate()
 
-  // Simulate the order confirmation process
   useEffect(() => {
-    // Here you could send the order to your server and get a confirmation response.
     if (cart.length === 0) {
-      navigate('/'); // Redirect to homepage if the cart is empty
+      navigate('/')
     } else {
       setOrderDetails({
-        orderId: Math.floor(Math.random() * 10000), // Simulate an order ID
+        orderId: Math.floor(Math.random() * 10000),
         cartItems: cart,
         total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
-      });
+      })
     }
-  }, [cart, navigate]);
+  }, [cart, navigate])
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-2xl font-bold mb-4">Order Confirmation</h1>
 
       {orderDetails ? (
@@ -48,7 +46,7 @@ const OrderConfirmation = () => {
         <p>Loading order details...</p>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default OrderConfirmation;
+export default OrderConfirmation

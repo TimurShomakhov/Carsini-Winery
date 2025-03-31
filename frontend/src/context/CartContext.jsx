@@ -1,47 +1,57 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react'
 
-// Create CartContext
-const CartContext = createContext();
+const CartContext = createContext()
 
-// CartProvider to wrap your app and provide cart data
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([])
 
-  // Add item to cart
+  // ✅ 1. Load from localStorage on mount
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart')
+    if (storedCart) {
+      setCart(JSON.parse(storedCart))
+    }
+  }, [])
+
+  // ✅ 2. Save to localStorage when cart changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
+      const existingItem = prevCart.find((item) => item.id === product.id)
+      if (existingItem) {
         return prevCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + product.quantity }
             : item
-        );
+        )
+      } else {
+        return [...prevCart, { ...product, quantity: product.quantity || 1 }]
       }
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
-  };
+    })
+  }
 
-  // Remove item from cart
   const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-  };
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id))
+  }
 
-  // Update item quantity
   const updateQuantity = (id, quantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === id ? { ...item, quantity } : item
       )
-    );
-  };
+    )
+  }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateQuantity }}
+    >
       {children}
     </CartContext.Provider>
-  );
-};
+  )
+}
 
-// Custom hook to use the CartContext
-export const useCart = () => useContext(CartContext);
+export const useCart = () => useContext(CartContext)

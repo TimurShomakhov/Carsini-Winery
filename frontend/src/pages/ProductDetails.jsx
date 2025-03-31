@@ -1,45 +1,76 @@
-import { useCart } from '../context/CartContext'; // Import useCart hook
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
+import Button from '../components/Button'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import toast from 'react-hot-toast'
 
 const ProductDetails = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const { addToCart } = useCart(); // Access addToCart function from context
+  const { id } = useParams()
+  const [product, setProduct] = useState(null)
+  const [quantity, setQuantity] = useState(1)
+  const { addToCart } = useCart()
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await fetch(`/api/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-    };
-    fetchProduct();
-  }, [id]);
+      const response = await fetch(`/api/products/${id}`)
+      const data = await response.json()
+      setProduct(data)
+    }
+    fetchProduct()
+  }, [id])
 
-  if (!product) return <div>Loading...</div>;
+  const increaseQty = () => setQuantity((prev) => prev + 1)
+  const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+
+  if (!product) return <div className="p-8 text-center">Loading...</div>
 
   return (
     <div>
       <Navbar />
-      <main className="p-4">
-        <div className="grid md:grid-cols-2 gap-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-96 object-cover rounded-lg"
+            className="w-full h-64 object-cover rounded-lg"
           />
           <div>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <p className="text-xl text-gray-700 mb-4">${product.price}</p>
-            <p className="text-gray-600 mb-6">{product.description}</p>
+            <p className="text-lg mb-4">{product.description}</p>
+            <p className="text-2xl font-semibold text-green-600 mb-4">${product.price}</p>
+
+            <div className="flex items-center gap-4 mb-6">
+              <button
+                onClick={decreaseQty}
+                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              >
+                -
+              </button>
+              <span className="text-lg font-medium">{quantity}</span>
+              <button
+                onClick={increaseQty}
+                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              >
+                +
+              </button>
+            </div>
+
             <Button
               text="Add to Cart"
-              onClick={() => addToCart(product)} // Add product to cart on click
+              onClick={() => {
+                addToCart({ ...product, quantity })
+                toast.success('Added to cart!')
+              }}
+              className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
             />
           </div>
         </div>
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default ProductDetails;
+export default ProductDetails

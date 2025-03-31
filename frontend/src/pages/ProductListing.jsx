@@ -33,23 +33,27 @@ const ProductListing = () => {
   }
 
   return (
-    <div className="px-4 sm:px-8 lg:px-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Products</h1>
       <SearchBar onSearch={handleSearch} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      {/* ✅ Integrated Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         {filteredProducts.length === 0 ? (
           <p>No products found</p>
         ) : (
           filteredProducts.map((product) => (
-            <div key={product.id} className="p-4 border rounded-lg shadow-md hover:shadow-lg transition duration-200">
+            <div
+              key={product.id}
+              className="border p-4 rounded-lg shadow hover:shadow-md transition"
+            >
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-48 object-cover rounded"
+                className="w-full h-48 object-cover rounded mb-3"
               />
-              <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
-              <p className="text-gray-700">${product.price}</p>
+              <h2 className="text-lg font-semibold">{product.name}</h2>
+              <p className="text-gray-600">${product.price}</p>
               <Link to={`/products/${product.id}`} className="block mt-3">
                 <Button text="View Details" />
               </Link>

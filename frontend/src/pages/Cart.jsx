@@ -5,15 +5,15 @@ const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart()
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Your Cart</h1>
 
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Cart Items */}
-          <div>
+        <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Cart items */}
+          <div className="sm:col-span-2">
             {cart.map((item) => (
               <div key={item.id} className="border p-4 rounded-lg mb-4 flex gap-4">
                 <img
@@ -56,7 +56,9 @@ const Cart = () => {
             <ul>
               {cart.map((item) => (
                 <li key={item.id} className="flex justify-between mb-2">
-                  <span>{item.name} x {item.quantity}</span>
+                  <span>
+                    {item.name} x {item.quantity}
+                  </span>
                   <span>${(item.price * item.quantity).toFixed(2)}</span>
                 </li>
               ))}
