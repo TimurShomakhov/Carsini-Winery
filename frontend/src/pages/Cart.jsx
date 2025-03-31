@@ -1,54 +1,75 @@
-import { useCart } from '../context/CartContext';
-import Button from '../components/Button';  // Default import
+import { useCart } from '../context/CartContext'
+import Button from '../components/Button'
 
 const Cart = () => {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity } = useCart()
 
   return (
-    <div>
+    <div className="p-4 md:p-8">
       <h1 className="text-3xl font-bold text-center mb-8">Your Cart</h1>
+
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div>
-          {cart.map((item) => (
-            <div key={item.id} className="border p-4 rounded-lg mb-4">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-32 h-32 object-cover mr-4 inline-block"
-              />
-              <div className="inline-block">
-                <h2 className="text-xl font-semibold">{item.name}</h2>
-                <p className="text-gray-600">${item.price}</p>
-                <div className="flex items-center mt-2">
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded"
-                    disabled={item.quantity === 1}
-                  >
-                    -
-                  </button>
-                  <span className="mx-2">{item.quantity}</span>
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded"
-                  >
-                    +
-                  </button>
-                </div>
-                <Button
-                  text="Remove"
-                  onClick={() => removeFromCart(item.id)}
-                  className="mt-2"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Cart Items */}
+          <div>
+            {cart.map((item) => (
+              <div key={item.id} className="border p-4 rounded-lg mb-4 flex gap-4">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-32 h-32 object-cover rounded"
                 />
+                <div>
+                  <h2 className="text-xl font-semibold">{item.name}</h2>
+                  <p className="text-gray-600">${item.price}</p>
+                  <div className="flex items-center mt-2">
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      className="bg-blue-500 text-white px-2 py-1 rounded"
+                      disabled={item.quantity === 1}
+                    >
+                      -
+                    </button>
+                    <span className="mx-2">{item.quantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className="bg-blue-500 text-white px-2 py-1 rounded"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <Button
+                    text="Remove"
+                    onClick={() => removeFromCart(item.id)}
+                    className="mt-2"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Order Summary */}
+          <div className="p-4 border rounded-lg bg-gray-50 shadow">
+            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            <ul>
+              {cart.map((item) => (
+                <li key={item.id} className="flex justify-between mb-2">
+                  <span>{item.name} x {item.quantity}</span>
+                  <span>${(item.price * item.quantity).toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+            <hr className="my-4" />
+            <p className="font-bold">
+              Total: ${cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
+            </p>
+          </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

@@ -3,20 +3,19 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
 import Button from '../components/Button'
-import axios from '../api/axiosInstance' // This is your custom axios instance that uses the proxy
+import axios from '../api/axiosInstance'
 
 const ProductListing = () => {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Fetch products from the backend when the page loads
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('/products') // This goes through your proxy to http://localhost:5000/api/products
+        const res = await axios.get('/products')
         setProducts(res.data)
-        setFilteredProducts(res.data) // Initialize filtered products
+        setFilteredProducts(res.data)
       } catch (err) {
         console.error('Failed to load products:', err)
       }
@@ -25,7 +24,6 @@ const ProductListing = () => {
     fetchProducts()
   }, [])
 
-  // Handle search logic
   const handleSearch = (query) => {
     setSearchQuery(query)
     const results = products.filter((product) =>
@@ -35,24 +33,24 @@ const ProductListing = () => {
   }
 
   return (
-    <div>
+    <div className="px-4 sm:px-8 lg:px-16">
       <h1 className="text-3xl font-bold text-center mb-8">Products</h1>
       <SearchBar onSearch={handleSearch} />
 
-      <div className="grid md:grid-cols-3 gap-8 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {filteredProducts.length === 0 ? (
           <p>No products found</p>
         ) : (
           filteredProducts.map((product) => (
-            <div key={product.id} className="border p-4 rounded-lg shadow-md">
+            <div key={product.id} className="p-4 border rounded-lg shadow-md hover:shadow-lg transition duration-200">
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-64 object-cover mb-4 rounded-md"
+                className="w-full h-48 object-cover rounded"
               />
-              <h2 className="text-xl font-semibold">{product.name}</h2>
-              <p className="text-gray-600">${product.price}</p>
-              <Link to={`/products/${product.id}`}>
+              <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
+              <p className="text-gray-700">${product.price}</p>
+              <Link to={`/products/${product.id}`} className="block mt-3">
                 <Button text="View Details" />
               </Link>
             </div>

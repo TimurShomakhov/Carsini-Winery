@@ -9,6 +9,8 @@ import Checkout from './pages/Checkout'; // Import Checkout Page
 import OrderConfirmation from './pages/OrderConfirmation'; // Import Order Confirmation Page
 import Signup from './components/Signup'; // Import Signup component
 import Login from './components/Login'; // Import Login component
+import About from './pages/AboutUs'
+
 
 const App = () => {
   return (
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/order-confirmation" element={<OrderConfirmation />} />  {/* Order Confirmation Page */}
         <Route path="/signup" element={<Signup />} />  {/* Signup Route */}
         <Route path="/login" element={<Login />} />    {/* Login Route */}
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );
