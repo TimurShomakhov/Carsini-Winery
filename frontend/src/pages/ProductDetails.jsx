@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext'
 import Button from '../components/Button'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Breadcrumbs from '../components/Breadcrumbs'
 import toast from 'react-hot-toast'
 
 const ProductDetails = () => {
@@ -27,8 +28,9 @@ const ProductDetails = () => {
   if (!product) return <div className="p-8 text-center">Loading...</div>
 
   return (
-    <div>
+    <>
       <Navbar />
+      <Breadcrumbs />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <img
@@ -69,7 +71,7 @@ const ProductDetails = () => {
         </div>
       </main>
       <Footer />
-    </div>
+    </>
   )
 }
 
