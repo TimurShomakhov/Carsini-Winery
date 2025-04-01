@@ -33,11 +33,13 @@ const ProductDetails = () => {
       <Breadcrumbs />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <img
-            src={product.image}
-            alt={`Bottle of ${product.name}`}
-            className="w-full h-64 object-cover rounded-lg"
-          />
+        <img
+  src={product.image}
+  alt={product.name}
+  className="w-full h-64 object-cover rounded-lg"
+  loading="lazy"
+/>
+
           <div>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
             <p className="text-lg mb-4">{product.description}</p>

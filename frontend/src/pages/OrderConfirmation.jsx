@@ -42,6 +42,7 @@ const OrderConfirmation = () => {
                     src={item.image}
                     alt={`Bottle of ${item.name}`}
                     className="w-16 h-16 object-cover rounded"
+                    loading="lazy"
                   />
                   <span className="flex-1">{item.name} x {item.quantity}</span>
                   <span>${(item.price * item.quantity).toFixed(2)}</span>

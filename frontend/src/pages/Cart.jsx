@@ -23,10 +23,12 @@ const Cart = () => {
               {cart.map((item) => (
                 <div key={item.id} className="border p-4 rounded-lg mb-4 flex gap-4">
                   <img
-                    src={item.image}
-                    alt={`Bottle of ${item.name}`}
-                    className="w-32 h-32 object-cover rounded"
-                  />
+  src={item.image}
+  alt={item.name}
+  className="w-32 h-32 object-cover rounded"
+  loading="lazy"
+/>
+
                   <div>
                     <h2 className="text-xl font-semibold">{item.name}</h2>
                     <p className="text-gray-600 dark:text-gray-300">${item.price}</p>

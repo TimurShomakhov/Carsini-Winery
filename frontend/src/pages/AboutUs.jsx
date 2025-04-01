@@ -19,6 +19,17 @@ const AboutUs = () => {
           </div>
         </section>
 
+        {/* Hero Image */}
+        <div className="max-w-6xl mx-auto px-4 mt-8">
+        <img
+  src="/images/carsini-banner.webp"
+  alt="Carsini Winery vineyard"
+  className="w-full h-96 object-cover rounded-lg"
+  loading="lazy"
+/>
+
+        </div>
+
         {/* Content Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <section className="max-w-3xl mx-auto">

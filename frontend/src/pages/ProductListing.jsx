@@ -57,6 +57,7 @@ const ProductListing = () => {
   src={product.image}
   alt={`Bottle of ${product.name}`}
   className="w-full h-48 object-cover rounded mb-3"
+  loading="lazy"
 />
                 <h2 className="text-lg font-semibold">{product.name}</h2>
                 <p className="text-gray-600 dark:text-gray-300">${product.price}</p>
