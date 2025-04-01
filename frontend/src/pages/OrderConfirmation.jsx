@@ -35,10 +35,15 @@ const OrderConfirmation = () => {
             <p className="mb-4">Order ID: {orderDetails.orderId}</p>
 
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-            <ul className="mb-4">
+            <ul className="mb-4 space-y-4">
               {orderDetails.cartItems.map((item) => (
-                <li key={item.id} className="flex justify-between mb-2">
-                  <span>{item.name} x {item.quantity}</span>
+                <li key={item.id} className="flex items-center justify-between gap-4">
+                  <img
+                    src={item.image}
+                    alt={`Bottle of ${item.name}`}
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                  <span className="flex-1">{item.name} x {item.quantity}</span>
                   <span>${(item.price * item.quantity).toFixed(2)}</span>
                 </li>
               ))}

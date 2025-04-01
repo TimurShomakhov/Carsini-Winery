@@ -35,7 +35,7 @@ const ProductDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <img
             src={product.image}
-            alt={product.name}
+            alt={`Bottle of ${product.name}`}
             className="w-full h-64 object-cover rounded-lg"
           />
           <div>
@@ -46,6 +46,7 @@ const ProductDetails = () => {
             <div className="flex items-center gap-4 mb-6">
               <button
                 onClick={decreaseQty}
+                aria-label={`Decrease quantity of ${product.name}`}
                 className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 -
@@ -53,6 +54,7 @@ const ProductDetails = () => {
               <span className="text-lg font-medium">{quantity}</span>
               <button
                 onClick={increaseQty}
+                aria-label={`Increase quantity of ${product.name}`}
                 className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 +

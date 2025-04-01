@@ -24,7 +24,7 @@ const Cart = () => {
                 <div key={item.id} className="border p-4 rounded-lg mb-4 flex gap-4">
                   <img
                     src={item.image}
-                    alt={item.name}
+                    alt={`Bottle of ${item.name}`}
                     className="w-32 h-32 object-cover rounded"
                   />
                   <div>
@@ -32,6 +32,7 @@ const Cart = () => {
                     <p className="text-gray-600 dark:text-gray-300">${item.price}</p>
                     <div className="flex items-center mt-2">
                       <button
+                        aria-label={`Decrease quantity of ${item.name}`}
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         className="bg-blue-500 text-white px-2 py-1 rounded"
                         disabled={item.quantity === 1}
@@ -40,6 +41,7 @@ const Cart = () => {
                       </button>
                       <span className="mx-2">{item.quantity}</span>
                       <button
+                        aria-label={`Increase quantity of ${item.name}`}
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         className="bg-blue-500 text-white px-2 py-1 rounded"
                       >
@@ -48,6 +50,7 @@ const Cart = () => {
                     </div>
                     <Button
                       text="Remove"
+                      aria-label={`Remove ${item.name} from cart`}
                       onClick={() => removeFromCart(item.id)}
                       className="mt-2"
                     />

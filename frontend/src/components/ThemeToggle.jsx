@@ -19,6 +19,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
+      aria-label="Toggle dark mode"
       className="border px-3 py-1 rounded text-sm text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition"
     >
       {darkMode ? '🌙 Dark' : '☀️ Light'}
