@@ -8,7 +8,7 @@ const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart()
 
   return (
-    <>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
       <Navbar />
       <Breadcrumbs />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -29,7 +29,7 @@ const Cart = () => {
                   />
                   <div>
                     <h2 className="text-xl font-semibold">{item.name}</h2>
-                    <p className="text-gray-600">${item.price}</p>
+                    <p className="text-gray-600 dark:text-gray-300">${item.price}</p>
                     <div className="flex items-center mt-2">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
@@ -57,14 +57,12 @@ const Cart = () => {
             </div>
 
             {/* Order Summary */}
-            <div className="p-4 border rounded-lg bg-gray-50 shadow">
+            <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 shadow">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
               <ul>
                 {cart.map((item) => (
                   <li key={item.id} className="flex justify-between mb-2">
-                    <span>
-                      {item.name} x {item.quantity}
-                    </span>
+                    <span>{item.name} x {item.quantity}</span>
                     <span>${(item.price * item.quantity).toFixed(2)}</span>
                   </li>
                 ))}
@@ -78,7 +76,7 @@ const Cart = () => {
         )}
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

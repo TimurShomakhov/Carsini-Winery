@@ -28,7 +28,7 @@ const ProductDetails = () => {
   if (!product) return <div className="p-8 text-center">Loading...</div>
 
   return (
-    <>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
       <Navbar />
       <Breadcrumbs />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -46,14 +46,14 @@ const ProductDetails = () => {
             <div className="flex items-center gap-4 mb-6">
               <button
                 onClick={decreaseQty}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 -
               </button>
               <span className="text-lg font-medium">{quantity}</span>
               <button
                 onClick={increaseQty}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 +
               </button>
@@ -71,7 +71,7 @@ const ProductDetails = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

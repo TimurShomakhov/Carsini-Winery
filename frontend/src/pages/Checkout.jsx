@@ -60,7 +60,7 @@ const Checkout = () => {
   }
 
   return (
-    <>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
       <Navbar />
       <Breadcrumbs />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -68,7 +68,7 @@ const Checkout = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Cart Summary */}
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
+          <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
             <ul>
               {cart.map((item) => (
@@ -146,7 +146,7 @@ const Checkout = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

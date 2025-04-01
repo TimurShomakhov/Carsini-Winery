@@ -3,7 +3,7 @@ import Footer from '../components/Footer'
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

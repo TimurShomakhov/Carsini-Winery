@@ -36,7 +36,7 @@ const ProductListing = () => {
   }
 
   return (
-    <>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
       <Navbar />
       <Breadcrumbs />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -59,7 +59,7 @@ const ProductListing = () => {
                   className="w-full h-48 object-cover rounded mb-3"
                 />
                 <h2 className="text-lg font-semibold">{product.name}</h2>
-                <p className="text-gray-600">${product.price}</p>
+                <p className="text-gray-600 dark:text-gray-300">${product.price}</p>
                 <Link to={`/products/${product.id}`} className="block mt-3">
                   <Button text="View Details" />
                 </Link>
@@ -69,7 +69,7 @@ const ProductListing = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

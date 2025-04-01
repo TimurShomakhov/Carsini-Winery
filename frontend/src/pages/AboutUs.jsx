@@ -5,15 +5,15 @@ import Breadcrumbs from '../components/Breadcrumbs'
 
 const AboutUs = () => {
   return (
-    <>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
       <Navbar />
       <Breadcrumbs />
-      <main className="min-h-screen bg-white text-gray-800">
+      <main>
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-yellow-100 to-red-100 py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-extrabold text-blue-800 mb-4">About Carsini Winery</h1>
-            <p className="text-xl text-gray-700">
+            <h1 className="text-5xl font-extrabold text-blue-800 dark:text-blue-300 mb-4">About Carsini Winery</h1>
+            <p className="text-xl text-gray-700 dark:text-gray-300">
               Where tradition meets taste — discover the heart of our vineyard.
             </p>
           </div>
@@ -49,7 +49,7 @@ const AboutUs = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 
