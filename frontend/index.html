@@ -2,11 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- ✅ Basic SEO -->
+    <title>Carsini Winery</title>
+    <meta name="description" content="Shop fine wines online from Carsini Winery. Explore reds, whites, and seasonal vintages from the heart of California." />
+    <meta name="keywords" content="winery, wine, shop wine, red wine, white wine, Carsini, California wines" />
+    <meta name="author" content="Carsini Winery" />
+
+    <!-- ✅ Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:title" content="Carsini Winery – Taste California" />
+    <meta property="og:description" content="Discover and shop fine California wines online from Carsini Winery." />
+    <meta property="og:image" content="https://www.carsiniwinery.com/images/carsini-banner.jpg" />
+    <meta property="og:url" content="https://www.carsiniwinery.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Carsini Winery – Taste California" />
+    <meta name="twitter:description" content="Shop fine California wines online from Carsini Winery." />
+    <meta name="twitter:image" content="https://www.carsiniwinery.com/images/carsini-banner.jpg" />
+
+    <!-- ✅ Theme Color for browser UI -->
+    <meta name="theme-color" content="#1e40af" />
+
+    <!-- ✅ Schema.org JSON-LD (for Google rich results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Carsini Winery",
+      "url": "https://www.carsiniwinery.com",
+      "logo": "https://www.carsiniwinery.com/logo.png",
+      "description": "Premium wines handcrafted in California's Napa Valley.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Napa Valley",
+        "addressRegion": "CA",
+        "postalCode": "94558",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.facebook.com/carsiniwinery",
+        "https://www.instagram.com/carsiniwinery"
+      ]
+    }
+    </script>
   </head>
-  <body>
+
+  <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
