@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
+// Initialize Sequelize instance
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -12,6 +13,7 @@ const sequelize = new Sequelize(
   }
 );
 
+// Test the database connection
 const testDB = async () => {
   try {
     await sequelize.authenticate();
@@ -23,4 +25,11 @@ const testDB = async () => {
 
 testDB();
 
-module.exports = sequelize;
+// Load models with DataTypes passed in
+const Product = require("./Product")(sequelize, Sequelize.DataTypes); // ✅ Fixed
+
+// Export sequelize and models
+module.exports = {
+  sequelize,
+  Product,
+};
