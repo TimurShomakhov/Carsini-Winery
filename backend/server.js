@@ -5,6 +5,7 @@ const cors = require("cors");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const reviewRoutes = require("./routes/reviewRoutes"); // ✅ New line
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/api/products", productRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/reviews", reviewRoutes); // ✅ New line
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Carsini Winery API");

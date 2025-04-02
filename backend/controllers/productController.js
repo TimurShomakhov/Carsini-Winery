@@ -1,5 +1,30 @@
 const { Product } = require("../models");
 
+// POST /products
+exports.createProduct = async (req, res) => {
+  try {
+    const { name, description, price, image, stock, category } = req.body;
+
+    if (!name || !price || !stock || !category) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const newProduct = await Product.create({
+      name,
+      description,
+      price,
+      image,
+      stock,
+      category,
+    });
+
+    res.status(201).json(newProduct);
+  } catch (err) {
+    console.error("❌ Failed to create product:", err);
+    res.status(500).json({ error: "Failed to create product" });
+  }
+};
+
 // GET /products
 exports.getAllProducts = async (req, res) => {
   try {

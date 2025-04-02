@@ -25,11 +25,18 @@ const testDB = async () => {
 
 testDB();
 
-// Load models with DataTypes passed in
-const Product = require("./Product")(sequelize, Sequelize.DataTypes); // ✅ Fixed
+// ✅ Load models
+const Product = require("./product")(sequelize, Sequelize.DataTypes);
+const Review = require("./review")(sequelize, Sequelize.DataTypes); // ✅ ADD THIS LINE
 
-// Export sequelize and models
+// ✅ Setup associations
+Product.associate?.({ Review });
+Review.associate?.({ Product });
+
+// ✅ Export sequelize and models
 module.exports = {
   sequelize,
+  Sequelize,
   Product,
+  Review,
 };
