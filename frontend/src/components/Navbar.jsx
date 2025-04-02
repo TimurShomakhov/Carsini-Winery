@@ -1,37 +1,44 @@
 // src/components/Navbar.jsx
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-white dark:bg-gray-900 shadow">
-      <div className="w-full max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
-        {/* Left: Brand + Links */}
-        <div className="flex items-center space-x-10">
-          <Link to="/" className="text-2xl font-bold text-blue-700 dark:text-white whitespace-nowrap">
-            Carsini Winery
-          </Link>
-          <ul className="hidden md:flex space-x-6">
-            <li>
-              <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
-            </li>
-            <li>
-              <Link to="/products" className="hover:text-blue-600 dark:hover:text-blue-400">Products</Link>
-            </li>
-            <li>
-              <Link to="/cart" className="hover:text-blue-600 dark:hover:text-blue-400">Cart</Link>
-            </li>
-            <li>
-              <Link to="/checkout" className="hover:text-blue-600 dark:hover:text-blue-400">Checkout</Link>
-            </li>
-            <li>
-              <Link to="/about" className="hover:text-blue-600 dark:hover:text-blue-400">About Us</Link>
-            </li>
-          </ul>
-        </div>
+    <nav className="w-full bg-parchment text-wine font-serif shadow">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        {/* Left: Logo + Brand */}
+        <Link to="/" className="flex items-center space-x-3">
+          <img
+            src={logo}
+            alt="Carsini Winery logo"
+            className="h-10 w-auto object-contain"
+          />
+          <span className="text-2xl italic font-bold tracking-wide whitespace-nowrap">
+          </span>
+        </Link>
+
+        {/* Center: Nav Links */}
+        <ul className="hidden md:flex space-x-8 text-lg">
+          <li>
+            <Link to="/" className="hover:underline">Home</Link>
+          </li>
+          <li>
+            <Link to="/products" className="hover:underline">Products</Link>
+          </li>
+          <li>
+            <Link to="/cart" className="hover:underline">Cart</Link>
+          </li>
+          <li>
+            <Link to="/checkout" className="hover:underline">Checkout</Link>
+          </li>
+          <li>
+            <Link to="/about" className="hover:underline">About Us</Link>
+          </li>
+        </ul>
 
         {/* Right: Theme Toggle */}
-        <div className="shrink-0">
+        <div className="ml-4 shrink-0">
           <ThemeToggle />
         </div>
       </div>

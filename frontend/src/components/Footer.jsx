@@ -1,9 +1,8 @@
-const Footer = () => {
+// src/components/Footer.jsx
+export default function Footer() {
   return (
-    <footer className="bg-blue-600 p-4 text-white text-center">
-      <p>&copy; 2025 Winery E-commerce. All rights reserved.</p>
+    <footer className="bg-parchment text-wine text-center py-6">
+      <p>© 2025 Carsini Winery. All rights reserved.</p>
     </footer>
   );
-};
-
-export default Footer;
+}
