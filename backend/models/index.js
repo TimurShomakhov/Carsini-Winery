@@ -1,7 +1,6 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-// Initialize Sequelize instance
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -9,11 +8,11 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
-    logging: false,
+    logging: console.log, // Show SQL queries for debugging
   }
 );
 
-// Test the database connection
+// Test DB connection
 const testDB = async () => {
   try {
     await sequelize.authenticate();
@@ -22,18 +21,22 @@ const testDB = async () => {
     console.error("❌ Database connection failed:", error);
   }
 };
-
 testDB();
 
-// ✅ Load models
+// Load models
 const Product = require("./product")(sequelize, Sequelize.DataTypes);
-const Review = require("./review")(sequelize, Sequelize.DataTypes); // ✅ ADD THIS LINE
+const Review = require("./review")(sequelize, Sequelize.DataTypes);
 
-// ✅ Setup associations
+// Setup associations
 Product.associate?.({ Review });
 Review.associate?.({ Product });
 
-// ✅ Export sequelize and models
+// ✅ Sync models to DB (important!)
+sequelize.sync({ alter: true }) // or force: true in dev only
+  .then(() => console.log("✅ Tables synced"))
+  .catch(err => console.error("❌ Sync failed:", err));
+
+// Export
 module.exports = {
   sequelize,
   Sequelize,
