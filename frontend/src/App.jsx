@@ -11,30 +11,32 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import About from "./pages/AboutUs";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <Router>
-      <Toaster position="top-right" />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductListing />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute>
-              <Checkout />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/order-confirmation" element={<OrderConfirmation />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <div className="w-full min-h-screen bg-base-100 text-base-content flex flex-col">
+        <Toaster position="top-right" />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductListing />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
     </Router>
   );
 };

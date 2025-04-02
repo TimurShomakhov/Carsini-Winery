@@ -1,18 +1,21 @@
 // src/pages/AboutUs.jsx
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Breadcrumbs from '../components/Breadcrumbs'
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const AboutUs = () => {
   return (
-    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
       <Navbar />
       <Breadcrumbs />
-      <main>
+
+      <main className="flex-grow w-full">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-yellow-100 to-red-100 py-16 px-4">
+        <section className="bg-gradient-to-r from-yellow-100 to-red-100 py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-extrabold text-blue-800 dark:text-blue-300 mb-4">About Carsini Winery</h1>
+            <h1 className="text-5xl font-extrabold text-blue-800 dark:text-blue-300 mb-4">
+              About Carsini Winery
+            </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300">
               Where tradition meets taste — discover the heart of our vineyard.
             </p>
@@ -20,18 +23,17 @@ const AboutUs = () => {
         </section>
 
         {/* Hero Image */}
-        <div className="max-w-6xl mx-auto px-4 mt-8">
-        <img
-  src="/images/carsini-banner.webp"
-  alt="Carsini Winery vineyard"
-  className="w-full h-96 object-cover rounded-lg"
-  loading="lazy"
-/>
-
+        <div className="max-w-6xl mx-auto px-4 mt-12">
+          <img
+            src="/images/carsini-banner.webp"
+            alt="Carsini Winery vineyard"
+            className="w-full h-96 object-cover rounded-lg shadow-lg"
+            loading="lazy"
+          />
         </div>
 
         {/* Content Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <section className="max-w-3xl mx-auto">
             <p className="text-lg leading-relaxed mb-6">
               At <strong>Carsini Winery</strong>, we believe wine is more than just a drink — it's an experience. 
@@ -48,7 +50,7 @@ const AboutUs = () => {
               Join us on a journey of flavor, craftsmanship, and connection — because at Carsini, wine is family.
             </p>
 
-            <div className="mt-8 text-center">
+            <div className="mt-10 text-center">
               <a
                 href="/products"
                 className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700 transition"
@@ -59,9 +61,10 @@ const AboutUs = () => {
           </section>
         </div>
       </main>
+
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

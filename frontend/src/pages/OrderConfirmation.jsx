@@ -1,66 +1,74 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useCart } from '../context/CartContext'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Breadcrumbs from '../components/Breadcrumbs'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const OrderConfirmation = () => {
-  const { cart } = useCart()
-  const [orderDetails, setOrderDetails] = useState(null)
-  const navigate = useNavigate()
+  const { cart } = useCart();
+  const [orderDetails, setOrderDetails] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cart.length === 0) {
-      navigate('/')
+      navigate('/');
     } else {
       setOrderDetails({
         orderId: Math.floor(Math.random() * 10000),
         cartItems: cart,
         total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
-      })
+      });
     }
-  }, [cart, navigate])
+  }, [cart, navigate]);
 
   return (
-    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white min-h-screen">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
       <Navbar />
       <Breadcrumbs />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-2xl font-bold mb-4">Order Confirmation</h1>
 
-        {orderDetails ? (
-          <>
-            <p className="mb-4">Thank you for your order!</p>
-            <p className="mb-4">Order ID: {orderDetails.orderId}</p>
+      <main className="flex-grow w-full px-4 py-16">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold mb-6 text-center">Order Confirmation</h1>
 
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-            <ul className="mb-4 space-y-4">
-              {orderDetails.cartItems.map((item) => (
-                <li key={item.id} className="flex items-center justify-between gap-4">
-                  <img
-                    src={item.image}
-                    alt={`Bottle of ${item.name}`}
-                    className="w-16 h-16 object-cover rounded"
-                    loading="lazy"
-                  />
-                  <span className="flex-1">{item.name} x {item.quantity}</span>
-                  <span>${(item.price * item.quantity).toFixed(2)}</span>
-                </li>
-              ))}
-            </ul>
+          {orderDetails ? (
+            <>
+              <p className="mb-4 text-center text-lg">Thank you for your order!</p>
+              <p className="mb-6 text-center">Order ID: <strong>{orderDetails.orderId}</strong></p>
 
-            <div className="mt-4 font-semibold">
-              <p>Total: ${orderDetails.total.toFixed(2)}</p>
-            </div>
-          </>
-        ) : (
-          <p>Loading order details...</p>
-        )}
+              <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
+
+              <ul className="mb-6 divide-y divide-gray-200 dark:divide-gray-700">
+                {orderDetails.cartItems.map((item) => (
+                  <li key={item.id} className="flex items-center justify-between gap-4 py-4">
+                    <img
+                      src={item.image}
+                      alt={`Bottle of ${item.name}`}
+                      className="w-16 h-16 object-cover rounded"
+                      loading="lazy"
+                    />
+                    <div className="flex-1">
+                      <p className="font-medium">{item.name}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">x {item.quantity}</p>
+                    </div>
+                    <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="text-right text-xl font-semibold">
+                Total: ${orderDetails.total.toFixed(2)}
+              </div>
+            </>
+          ) : (
+            <p className="text-center text-lg">Loading order details...</p>
+          )}
+        </div>
       </main>
+
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default OrderConfirmation
+export default OrderConfirmation;
