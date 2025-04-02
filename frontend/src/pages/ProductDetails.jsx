@@ -12,19 +12,35 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await fetch(`/api/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
+      try {
+        const response = await fetch(`/api/products/${id}`);
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error('Failed to fetch product:', error);
+      }
     };
+
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch(`/api/reviews/${id}`);
+        const data = await res.json();
+        setReviews(data);
+      } catch (error) {
+        console.error('Failed to fetch reviews:', error);
+      }
+    };
+
     fetchProduct();
+    fetchReviews();
   }, [id]);
 
   const increaseQty = () => setQuantity((prev) => prev + 1);
-  const decreaseQty = () =>
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   if (!product)
     return (
@@ -84,6 +100,30 @@ const ProductDetails = () => {
             />
           </div>
         </div>
+
+        {/* Reviews Section */}
+        <section className="mt-12 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-4">Customer Reviews</h2>
+
+          {reviews.length === 0 ? (
+            <p className="text-gray-500">No reviews yet.</p>
+          ) : (
+            <ul className="space-y-4">
+              {reviews.map((review) => (
+                <li
+                  key={review.id}
+                  className="border border-gray-300 dark:border-gray-700 p-4 rounded shadow"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-medium">Rating:</span>
+                    <span>{'⭐'.repeat(review.rating)}</span>
+                  </div>
+                  <p className="text-gray-800 dark:text-gray-200">{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       </main>
 
       <Footer />
