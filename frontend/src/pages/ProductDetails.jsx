@@ -13,6 +13,7 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState({ rating: 5, comment: '' });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -41,6 +42,36 @@ const ProductDetails = () => {
 
   const increaseQty = () => setQuantity((prev) => prev + 1);
   const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewReview((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId: product.id,
+          userId: 101, // Replace with real user ID if using auth
+          rating: parseInt(newReview.rating),
+          comment: newReview.comment,
+        }),
+      });
+
+      if (!res.ok) throw new Error('Failed to submit review');
+      const data = await res.json();
+      setReviews((prev) => [data, ...prev]);
+      setNewReview({ rating: 5, comment: '' });
+      toast.success('Review submitted!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Error submitting review.');
+    }
+  };
 
   if (!product)
     return (
@@ -108,7 +139,7 @@ const ProductDetails = () => {
           {reviews.length === 0 ? (
             <p className="text-gray-500">No reviews yet.</p>
           ) : (
-            <ul className="space-y-4">
+            <ul className="space-y-4 mb-8">
               {reviews.map((review) => (
                 <li
                   key={review.id}
@@ -123,6 +154,45 @@ const ProductDetails = () => {
               ))}
             </ul>
           )}
+
+          {/* Review Form */}
+          <h3 className="text-xl font-semibold mb-2">Leave a Review</h3>
+          <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+            <div>
+              <label htmlFor="rating" className="block font-medium">Rating</label>
+              <select
+                name="rating"
+                id="rating"
+                value={newReview.rating}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              >
+                {[1, 2, 3, 4, 5].map((r) => (
+                  <option key={r} value={r}>{r} Star{r > 1 ? 's' : ''}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="comment" className="block font-medium">Comment</label>
+              <textarea
+                name="comment"
+                id="comment"
+                rows="3"
+                value={newReview.comment}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            >
+              Submit Review
+            </button>
+          </form>
         </section>
       </main>
 
