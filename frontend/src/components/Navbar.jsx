@@ -2,8 +2,12 @@
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import logo from '../assets/logo.png';
+import { useAuth } from '../context/AuthContext'; // ✅ useAuth hook
+import { toast } from 'react-hot-toast'; // ✅ toast import
 
 const Navbar = () => {
+  const { token, logout } = useAuth();
+
   return (
     <nav className="w-full bg-parchment text-wine font-serif shadow">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
@@ -15,6 +19,7 @@ const Navbar = () => {
             className="h-10 w-auto object-contain"
           />
           <span className="text-2xl italic font-bold tracking-wide whitespace-nowrap">
+            Carsini Winery
           </span>
         </Link>
 
@@ -37,9 +42,24 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Right: Theme Toggle */}
-        <div className="ml-4 shrink-0">
+        {/* Right: Theme Toggle + Auth Button */}
+        <div className="ml-4 flex items-center space-x-4">
           <ThemeToggle />
+          {token ? (
+            <button
+              onClick={() => {
+                logout();
+                toast.success('Logged out!');
+              }}
+              className="text-sm underline hover:text-red-600 transition"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="text-sm underline hover:text-green-700 transition">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>
