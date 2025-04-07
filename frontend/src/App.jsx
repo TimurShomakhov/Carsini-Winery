@@ -5,10 +5,11 @@ import Home from "./pages/Home";
 import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout"; // ✅ From pages
+import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Signup from "./components/Signup"; // Optional: move to pages for consistency
-import Login from "./pages/Login"; // ✅ From pages
+import Login from "./pages/Login";
+import Register from "./pages/Register"; // ✅ NEW: Register page
 import About from "./pages/AboutUs";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/order-confirmation" element={<OrderConfirmation />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} /> {/* ✅ NEW route */}
             <Route path="/about" element={<About />} />
           </Routes>
         </div>

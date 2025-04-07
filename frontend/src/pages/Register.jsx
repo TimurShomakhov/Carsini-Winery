@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from '../api/axiosInstance';
 import toast from 'react-hot-toast';
 
-const Login = () => {
+const Register = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -20,27 +20,33 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/users/login', formData);
-      login(res.data.token); // Store token in context
-      toast.success('Login successful!');
+      // ✅ FIXED: removed extra /api – it's already set in axiosInstance.js
+      const res = await axios.post('/users/register', formData);
+      login(res.data.token);
+      toast.success('Account created!');
       navigate('/checkout');
     } catch (err) {
-      toast.error('Invalid email or password');
+      toast.error('Registration failed');
       console.error(err);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
-      <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm"
+      >
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
 
         <p className="mt-4 text-center text-sm">
-  Don’t have an account? <a href="/register" className="text-blue-600 underline">Sign up</a>
-</p>
+          Already have an account?{' '}
+          <a href="/login" className="text-blue-600 underline">
+            Sign in
+          </a>
+        </p>
 
-
-        <label className="block mb-2 font-medium">Email</label>
+        <label className="block mt-6 mb-2 font-medium">Email</label>
         <input
           type="email"
           name="email"
@@ -64,11 +70,11 @@ const Login = () => {
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
         >
-          Sign In
+          Sign Up
         </button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
