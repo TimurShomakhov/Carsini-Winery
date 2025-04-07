@@ -1,23 +1,31 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const apiLimiter = require("./middleware/rateLimiter"); // ✅ Rate limiter
 
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const reviewRoutes = require("./routes/reviewRoutes"); // ✅ New line
+const reviewRoutes = require("./routes/reviewRoutes"); // ✅ Review route
 
 const app = express();
 
-// Middleware
+// ✅ Global Middleware
 app.use(express.json());
 app.use(cors());
 
-// Routes
+// ✅ Apply limiter globally (uncomment to enable globally)
+// app.use(apiLimiter);
+
+// ✅ OR apply limiter only to sensitive routes
+app.use("/api/auth", apiLimiter);
+app.use("/api/orders", apiLimiter);
+
+// ✅ Routes
 app.use("/api/products", productRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/reviews", reviewRoutes); // ✅ New line
+app.use("/api/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Carsini Winery API");
