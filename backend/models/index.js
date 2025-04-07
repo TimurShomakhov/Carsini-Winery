@@ -1,4 +1,6 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -8,38 +10,49 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
-    logging: console.log, // Show SQL queries for debugging
+    logging: console.log,
   }
 );
 
 // Test DB connection
-const testDB = async () => {
+(async () => {
   try {
     await sequelize.authenticate();
     console.log("✅ Database connected successfully.");
   } catch (error) {
     console.error("❌ Database connection failed:", error);
   }
-};
-testDB();
+})();
 
-// Load models
-const Product = require("./product")(sequelize, Sequelize.DataTypes);
-const Review = require("./review")(sequelize, Sequelize.DataTypes);
+// Initialize all models
+const db = {};
+const basename = path.basename(__filename);
 
-// Setup associations
-Product.associate?.({ Review });
-Review.associate?.({ Product });
+fs.readdirSync(__dirname)
+  .filter(
+    (file) =>
+      file !== basename && file.endsWith(".js") && !file.startsWith(".")
+  )
+  .forEach((file) => {
+    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
+    db[model.name] = model;
+  });
 
-// ✅ Sync models to DB (important!)
-sequelize.sync({ alter: true }) // or force: true in dev only
-  .then(() => console.log("✅ Tables synced"))
-  .catch(err => console.error("❌ Sync failed:", err));
+// Apply associations
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+// Sync models (comment this out if syncing manually in server.js)
+sequelize
+  .sync({ alter: true }) // or { force: true } if needed
+  .then(() => console.log("✅ All models synced"))
+  .catch((err) => console.error("❌ Sync failed:", err));
 
 // Export
-module.exports = {
-  sequelize,
-  Sequelize,
-  Product,
-  Review,
-};
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;

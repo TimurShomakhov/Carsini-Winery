@@ -1,12 +1,16 @@
-
 'use strict';
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     static associate(models) {
-      Review.belongsTo(models.Product, { foreignKey: 'productId' });
-      // Optional: If users are involved
+      // A review belongs to a product
+      Review.belongsTo(models.Product, {
+        foreignKey: 'productId',
+        onDelete: 'CASCADE', // if the product is deleted, its reviews are too
+      });
+
+      // Optional: If user associations are added later
       // Review.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
