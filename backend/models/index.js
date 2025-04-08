@@ -3,16 +3,17 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
-    logging: console.log,
-  }
-);
+// ✅ Use DATABASE_URL with SSL for Render
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres",
+  logging: console.log,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
 // Test DB connection
 (async () => {
@@ -45,9 +46,9 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-// Sync models (comment this out if syncing manually in server.js)
+// Sync models
 sequelize
-  .sync({ alter: true }) // or { force: true } if needed
+  .sync({ alter: true }) // or { force: true }
   .then(() => console.log("✅ All models synced"))
   .catch((err) => console.error("❌ Sync failed:", err));
 
