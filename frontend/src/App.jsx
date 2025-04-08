@@ -11,6 +11,7 @@ import Signup from "./components/Signup"; // Optional: move to pages for consist
 import Login from "./pages/Login";
 import Register from "./pages/Register"; // ✅ NEW: Register page
 import About from "./pages/AboutUs";
+import Events from "./pages/Events"; // ✅ NEW: Events page
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} /> {/* ✅ NEW route */}
             <Route path="/about" element={<About />} />
+            <Route path="/events" element={<Events />} /> {/* ✅ NEW route */}
           </Routes>
         </div>
       </Router>
