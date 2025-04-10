@@ -31,7 +31,7 @@ const events = [
 
 const Events = () => {
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen flex flex-col">
+    <div className="bg-parchment text-black min-h-screen flex flex-col">
       <Navbar />
       <Breadcrumbs />
       <main className="flex-grow w-full px-4 py-16 max-w-7xl mx-auto">
@@ -40,7 +40,7 @@ const Events = () => {
           {events.map((event) => (
             <div
               key={event.id}
-              className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
+              className="border border-wine/20 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white"
             >
               {event.image && (
                 <img
@@ -52,10 +52,8 @@ const Events = () => {
               )}
               <div className="p-6">
                 <h2 className="text-xl font-semibold mb-2">{event.title}</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  {event.date}
-                </p>
-                <p className="text-gray-700 dark:text-gray-200">{event.description}</p>
+                <p className="text-sm text-wine/70 mb-2">{event.date}</p>
+                <p className="text-gray-800">{event.description}</p>
               </div>
             </div>
           ))}

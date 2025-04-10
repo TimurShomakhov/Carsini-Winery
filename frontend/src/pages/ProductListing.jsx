@@ -1,4 +1,3 @@
-// src/pages/ProductListing.jsx
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
@@ -36,7 +35,7 @@ const ProductListing = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
+    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
       <Navbar />
       <Breadcrumbs />
 
@@ -55,7 +54,7 @@ const ProductListing = () => {
               filteredProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="border p-4 rounded-lg shadow hover:shadow-md transition"
+                  className="border border-wine/20 p-4 rounded-lg shadow-sm hover:shadow-md transition bg-white"
                 >
                   <img
                     src={product.image}
@@ -64,7 +63,7 @@ const ProductListing = () => {
                     loading="lazy"
                   />
                   <h2 className="text-lg font-semibold">{product.name}</h2>
-                  <p className="text-gray-600 dark:text-gray-300">${product.price}</p>
+                  <p className="text-gray-700">${product.price}</p>
                   <Link to={`/products/${product.id}`} className="block mt-3">
                     <Button text="View Details" />
                   </Link>

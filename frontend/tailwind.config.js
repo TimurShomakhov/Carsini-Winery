@@ -2,19 +2,23 @@
 export default {
   content: [
     './index.html',
-    './src/**/*.{js,jsx}', // important for Vite + JSX
+    './src/**/*.{js,jsx}',
   ],
   theme: {
     extend: {
       colors: {
         parchment: '#E9E3D4',
-        wine: '#8B0000', // or whatever deep red tone you’re using
+        wine: '#8B0000',
       },
       fontFamily: {
         serif: ['Georgia', 'serif'],
         cursive: ['"Dancing Script"', 'cursive'],
+        italianno: ['Italianno', 'cursive'],
       },
     },
   },
-  plugins: [],
-}
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: false,
+  },    
+};

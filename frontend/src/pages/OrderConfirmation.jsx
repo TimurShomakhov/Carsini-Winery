@@ -23,7 +23,7 @@ const OrderConfirmation = () => {
   }, [cart, navigate]);
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
+    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
       <Navbar />
       <Breadcrumbs />
 
@@ -38,7 +38,7 @@ const OrderConfirmation = () => {
 
               <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
 
-              <ul className="mb-6 divide-y divide-gray-200 dark:divide-gray-700">
+              <ul className="mb-6 divide-y divide-wine/20">
                 {orderDetails.cartItems.map((item) => (
                   <li key={item.id} className="flex items-center justify-between gap-4 py-4">
                     <img
@@ -49,7 +49,7 @@ const OrderConfirmation = () => {
                     />
                     <div className="flex-1">
                       <p className="font-medium">{item.name}</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">x {item.quantity}</p>
+                      <p className="text-sm text-gray-600">x {item.quantity}</p>
                     </div>
                     <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
                   </li>

@@ -75,13 +75,13 @@ const ProductDetails = () => {
 
   if (!product)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+      <div className="min-h-screen flex items-center justify-center bg-parchment text-black">
         <p className="text-xl">Loading...</p>
       </div>
     );
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
+    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
       <Navbar />
       <Breadcrumbs />
 
@@ -99,7 +99,7 @@ const ProductDetails = () => {
           <div>
             <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
             <p className="text-lg mb-4">{product.description}</p>
-            <p className="text-2xl font-semibold text-green-600 mb-4">
+            <p className="text-2xl font-semibold text-wine mb-4">
               ${product.price}
             </p>
 
@@ -107,7 +107,7 @@ const ProductDetails = () => {
               <button
                 onClick={decreaseQty}
                 aria-label={`Decrease quantity of ${product.name}`}
-                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
+                className="px-3 py-1 bg-wine/10 rounded hover:bg-wine/20"
               >
                 -
               </button>
@@ -115,7 +115,7 @@ const ProductDetails = () => {
               <button
                 onClick={increaseQty}
                 aria-label={`Increase quantity of ${product.name}`}
-                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
+                className="px-3 py-1 bg-wine/10 rounded hover:bg-wine/20"
               >
                 +
               </button>
@@ -127,7 +127,7 @@ const ProductDetails = () => {
                 addToCart({ ...product, quantity });
                 toast.success('Added to cart!');
               }}
-              className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+              className="bg-wine hover:bg-wine/80 text-white py-2 px-4 rounded"
             />
           </div>
         </div>
@@ -137,19 +137,19 @@ const ProductDetails = () => {
           <h2 className="text-2xl font-semibold mb-4">Customer Reviews</h2>
 
           {reviews.length === 0 ? (
-            <p className="text-gray-500">No reviews yet.</p>
+            <p className="text-gray-600">No reviews yet.</p>
           ) : (
             <ul className="space-y-4 mb-8">
               {reviews.map((review) => (
                 <li
                   key={review.id}
-                  className="border border-gray-300 dark:border-gray-700 p-4 rounded shadow"
+                  className="border border-wine/20 p-4 rounded shadow-sm bg-white"
                 >
                   <div className="flex items-center gap-2 mb-1">
                     <span className="font-medium">Rating:</span>
                     <span>{'⭐'.repeat(review.rating)}</span>
                   </div>
-                  <p className="text-gray-800 dark:text-gray-200">{review.comment}</p>
+                  <p className="text-gray-800">{review.comment}</p>
                 </li>
               ))}
             </ul>
@@ -165,7 +165,7 @@ const ProductDetails = () => {
                 id="rating"
                 value={newReview.rating}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-wine/20 rounded bg-white"
               >
                 {[1, 2, 3, 4, 5].map((r) => (
                   <option key={r} value={r}>{r} Star{r > 1 ? 's' : ''}</option>
@@ -181,14 +181,14 @@ const ProductDetails = () => {
                 rows="3"
                 value={newReview.comment}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-wine/20 rounded bg-white"
                 required
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              className="bg-wine text-white px-4 py-2 rounded hover:bg-wine/80 transition"
             >
               Submit Review
             </button>

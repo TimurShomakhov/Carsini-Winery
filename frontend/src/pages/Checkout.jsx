@@ -60,7 +60,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
+    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
       <Navbar />
       <Breadcrumbs />
 
@@ -70,7 +70,7 @@ const Checkout = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Cart Summary */}
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow">
+            <div className="bg-white p-6 rounded-lg border border-wine/20 shadow-sm">
               <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
               <ul className="space-y-2">
                 {cart.map((item) => (
@@ -98,7 +98,7 @@ const Checkout = () => {
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-800"
+                  className="w-full p-2 border border-wine/20 rounded-md bg-white"
                 />
               </div>
 
@@ -113,7 +113,7 @@ const Checkout = () => {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-800"
+                  className="w-full p-2 border border-wine/20 rounded-md bg-white"
                 />
               </div>
 
@@ -127,13 +127,13 @@ const Checkout = () => {
                   required
                   value={formData.address}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-800"
+                  className="w-full p-2 border border-wine/20 rounded-md bg-white"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold p-3 rounded-md transition"
+                className="w-full bg-wine hover:bg-wine/80 text-white font-semibold p-3 rounded-md transition"
               >
                 Submit Order
               </button>

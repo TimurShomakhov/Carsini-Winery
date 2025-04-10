@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/users/login', formData);
-      login(res.data.token); // Store token in context
+      login(res.data.token);
       toast.success('Login successful!');
       navigate('/checkout');
     } catch (err) {
@@ -31,23 +31,28 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
-      <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center bg-parchment text-black">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white border border-wine/20 p-8 rounded-lg shadow-md w-full max-w-sm"
+      >
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
 
         <p className="mt-4 text-center text-sm">
-  Don’t have an account? <a href="/register" className="text-blue-600 underline">Sign up</a>
-</p>
+          Don’t have an account?{' '}
+          <a href="/register" className="text-wine underline hover:text-wine/80">
+            Sign up
+          </a>
+        </p>
 
-
-        <label className="block mb-2 font-medium">Email</label>
+        <label className="block mt-6 mb-2 font-medium">Email</label>
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
           required
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-2 mb-4 border border-wine/20 rounded bg-white"
         />
 
         <label className="block mb-2 font-medium">Password</label>
@@ -57,12 +62,12 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
           required
-          className="w-full p-2 mb-6 border rounded"
+          className="w-full p-2 mb-6 border border-wine/20 rounded bg-white"
         />
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+          className="w-full bg-wine hover:bg-wine/80 text-white py-2 rounded transition"
         >
           Sign In
         </button>

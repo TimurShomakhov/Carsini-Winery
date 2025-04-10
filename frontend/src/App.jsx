@@ -9,9 +9,9 @@ import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Signup from "./components/Signup"; // Optional: move to pages for consistency
 import Login from "./pages/Login";
-import Register from "./pages/Register"; // ✅ NEW: Register page
+import Register from "./pages/Register";
 import About from "./pages/AboutUs";
-import Events from "./pages/Events"; // ✅ NEW: Events page
+import Events from "./pages/Events";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
@@ -20,7 +20,8 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-        <div className="w-full min-h-screen bg-base-100 text-base-content flex flex-col">
+      <div style={{ backgroundColor: '#E9E3D4' }} className="min-h-screen w-full text-wine flex flex-col">
+
           <Toaster position="top-right" />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -38,9 +39,9 @@ const App = () => {
             <Route path="/order-confirmation" element={<OrderConfirmation />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} /> {/* ✅ NEW route */}
+            <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
-            <Route path="/events" element={<Events />} /> {/* ✅ NEW route */}
+            <Route path="/events" element={<Events />} />
           </Routes>
         </div>
       </Router>

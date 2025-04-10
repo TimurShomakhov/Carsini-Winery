@@ -1,53 +1,36 @@
-// src/components/Navbar.jsx
 import { Link } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
 import logo from '../assets/logo.png';
-import { useAuth } from '../context/AuthContext'; // ✅ useAuth hook
-import { toast } from 'react-hot-toast'; // ✅ toast import
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
   const { token, logout } = useAuth();
 
   return (
-    <nav className="w-full bg-parchment text-wine font-serif shadow">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        {/* Left: Logo + Brand */}
+    <nav className="w-full bg-parchment text-wine font-serif shadow-md">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+        {/* Left: Logo */}
         <Link to="/" className="flex items-center space-x-3">
           <img
             src={logo}
             alt="Carsini Winery logo"
             className="h-10 w-auto object-contain"
           />
-          <span className="text-2xl italic font-bold tracking-wide whitespace-nowrap">
-            Carsini Winery
-          </span>
+          <span className="font-italianno text-3xl tracking-wide hidden sm:inline">Carsini Winery</span>
         </Link>
 
         {/* Center: Nav Links */}
-        <ul className="hidden md:flex space-x-8 text-lg">
-          <li>
-            <Link to="/" className="hover:underline">Home</Link>
-          </li>
-          <li>
-  <Link to="/events" className="hover:underline">Events</Link>
-</li>
-          <li>
-            <Link to="/products" className="hover:underline">Products</Link>
-          </li>
-          <li>
-            <Link to="/cart" className="hover:underline">Cart</Link>
-          </li>
-          <li>
-            <Link to="/checkout" className="hover:underline">Checkout</Link>
-          </li>
-          <li>
-            <Link to="/about" className="hover:underline">About Us</Link>
-          </li>
+        <ul className="hidden md:flex space-x-6 text-lg italic">
+          <li><Link to="/" className="hover:underline hover:text-wine/80 transition">Home</Link></li>
+          <li><Link to="/events" className="hover:underline hover:text-wine/80 transition">Events</Link></li>
+          <li><Link to="/products" className="hover:underline hover:text-wine/80 transition">Products</Link></li>
+          <li><Link to="/cart" className="hover:underline hover:text-wine/80 transition">Cart</Link></li>
+          <li><Link to="/checkout" className="hover:underline hover:text-wine/80 transition">Checkout</Link></li>
+          <li><Link to="/about" className="hover:underline hover:text-wine/80 transition">About Us</Link></li>
         </ul>
 
-        {/* Right: Theme Toggle + Auth Button */}
+        {/* Right: Auth only (ThemeToggle removed) */}
         <div className="ml-4 flex items-center space-x-4">
-          <ThemeToggle />
           {token ? (
             <button
               onClick={() => {

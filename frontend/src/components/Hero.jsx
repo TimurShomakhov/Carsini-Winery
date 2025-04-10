@@ -7,7 +7,7 @@ export default function Hero() {
       <img
         src={heroImage}
         alt="Winery view"
-        className="w-full h-auto object-cover"
+        className="w-full h-auto object-cover rounded-none shadow-none"
       />
     </section>
   );

@@ -13,7 +13,7 @@ const Cart = () => {
   );
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
+    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
       <Navbar />
       <Breadcrumbs />
 
@@ -30,7 +30,7 @@ const Cart = () => {
                 {cart.map((item) => (
                   <div
                     key={item.id}
-                    className="flex flex-col sm:flex-row gap-4 border p-4 rounded-lg shadow"
+                    className="flex flex-col sm:flex-row gap-4 border border-wine/30 p-4 rounded-lg shadow-sm bg-white"
                   >
                     <img
                       src={item.image}
@@ -42,14 +42,14 @@ const Cart = () => {
                     <div className="flex flex-col justify-between flex-1">
                       <div>
                         <h2 className="text-xl font-semibold">{item.name}</h2>
-                        <p className="text-gray-600 dark:text-gray-300">${item.price}</p>
+                        <p className="text-wine">${item.price}</p>
                       </div>
 
                       <div className="flex items-center gap-2 mt-2">
                         <button
                           aria-label={`Decrease quantity of ${item.name}`}
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="bg-blue-500 text-white px-2 py-1 rounded disabled:opacity-50"
+                          className="bg-wine text-white px-2 py-1 rounded disabled:opacity-50"
                           disabled={item.quantity === 1}
                         >
                           -
@@ -58,7 +58,7 @@ const Cart = () => {
                         <button
                           aria-label={`Increase quantity of ${item.name}`}
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="bg-blue-500 text-white px-2 py-1 rounded"
+                          className="bg-wine text-white px-2 py-1 rounded"
                         >
                           +
                         </button>
@@ -76,7 +76,7 @@ const Cart = () => {
               </div>
 
               {/* Order Summary */}
-              <div className="p-6 border rounded-lg bg-gray-50 dark:bg-gray-800 shadow h-fit">
+              <div className="p-6 border border-wine/20 rounded-lg bg-white shadow-sm h-fit">
                 <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
                 <ul className="space-y-2 mb-4">
                   {cart.map((item) => (
@@ -86,7 +86,7 @@ const Cart = () => {
                     </li>
                   ))}
                 </ul>
-                <hr className="my-4 border-gray-300 dark:border-gray-700" />
+                <hr className="my-4 border-wine/20" />
                 <p className="text-xl font-bold">
                   Total: ${totalPrice.toFixed(2)}
                 </p>

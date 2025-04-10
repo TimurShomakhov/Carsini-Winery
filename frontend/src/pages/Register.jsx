@@ -20,7 +20,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // ✅ FIXED: removed extra /api – it's already set in axiosInstance.js
       const res = await axios.post('/users/register', formData);
       login(res.data.token);
       toast.success('Account created!');
@@ -32,16 +31,16 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+    <div className="min-h-screen flex items-center justify-center bg-parchment text-black">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm"
+        className="bg-white border border-wine/20 p-8 rounded-lg shadow-md w-full max-w-sm"
       >
         <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
 
         <p className="mt-4 text-center text-sm">
           Already have an account?{' '}
-          <a href="/login" className="text-blue-600 underline">
+          <a href="/login" className="text-wine underline hover:text-wine/80">
             Sign in
           </a>
         </p>
@@ -53,7 +52,7 @@ const Register = () => {
           value={formData.email}
           onChange={handleChange}
           required
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-2 mb-4 border border-wine/20 rounded bg-white"
         />
 
         <label className="block mb-2 font-medium">Password</label>
@@ -63,12 +62,12 @@ const Register = () => {
           value={formData.password}
           onChange={handleChange}
           required
-          className="w-full p-2 mb-6 border rounded"
+          className="w-full p-2 mb-6 border border-wine/20 rounded bg-white"
         />
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+          className="w-full bg-wine hover:bg-wine/80 text-white py-2 rounded transition"
         >
           Sign Up
         </button>

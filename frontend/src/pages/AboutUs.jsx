@@ -1,22 +1,21 @@
-// src/pages/AboutUs.jsx
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col">
+    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
       <Navbar />
       <Breadcrumbs />
 
       <main className="flex-grow w-full">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-yellow-100 to-red-100 py-20 px-4">
+        <section className="bg-gradient-to-r from-parchment to-wine/10 py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-extrabold text-blue-800 dark:text-blue-300 mb-4">
+            <h1 className="text-5xl font-extrabold text-wine mb-4">
               About Carsini Winery
             </h1>
-            <p className="text-xl text-gray-700 dark:text-gray-300">
+            <p className="text-xl text-gray-800">
               Where tradition meets taste — discover the heart of our vineyard.
             </p>
           </div>
@@ -53,7 +52,7 @@ const AboutUs = () => {
             <div className="mt-10 text-center">
               <a
                 href="/products"
-                className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700 transition"
+                className="inline-block bg-wine text-white font-semibold px-6 py-3 rounded-md hover:bg-wine/80 transition"
               >
                 Explore Our Wines
               </a>
