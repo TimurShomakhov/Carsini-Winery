@@ -2,6 +2,10 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
 
+import wineTasting from '../assets/wine-tasting.jpg';
+import wineTour from '../assets/wine-tour.jpg';
+import jazzEvening from '../assets/jazz-evening.png';
+
 const events = [
   {
     id: 1,
@@ -9,7 +13,7 @@ const events = [
     date: 'April 27, 2025',
     description:
       'Join us for a golden-hour tasting of our best vintages with live acoustic music under the vines.',
-    image: '/images/event-sunset.jpg',
+    image: wineTasting,
   },
   {
     id: 2,
@@ -17,7 +21,7 @@ const events = [
     date: 'May 10, 2025',
     description:
       'Take a guided tour through our blooming vineyard and learn the art of winemaking from our experts.',
-    image: '/images/event-tour.jpg',
+    image: wineTour,
   },
   {
     id: 3,
@@ -25,7 +29,7 @@ const events = [
     date: 'June 15, 2025',
     description:
       'An elegant evening of bold reds and smooth jazz in our candlelit tasting hall.',
-    image: '/images/event-jazz.jpg',
+    image: jazzEvening,
   },
 ];
 
@@ -34,8 +38,9 @@ const Events = () => {
     <div className="bg-parchment text-black min-h-screen flex flex-col">
       <Navbar />
       <Breadcrumbs />
-      <main className="flex-grow w-full px-4 py-16 max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-10">Upcoming Events</h1>
+
+      <main className="flex-grow w-full px-4 py-16 max-w-7xl mx-auto mb-10">
+        <h1 className="text-4xl font-bold text-center mb-10">Upcoming Events at Carsini Winery</h1>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {events.map((event) => (
             <div
@@ -59,7 +64,11 @@ const Events = () => {
           ))}
         </div>
       </main>
-      <Footer />
+
+      {/* Add shadow to top of footer */}
+      <div className="shadow-[0_-2px_6px_rgba(0,0,0,0.1)]">
+        <Footer />
+      </div>
     </div>
   );
 };
