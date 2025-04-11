@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
+import carsiniBanner from '../assets/carsini.webp'; // ✅ import the image
 
 const AboutUs = () => {
   return (
@@ -22,11 +23,11 @@ const AboutUs = () => {
         </section>
 
         {/* Hero Image */}
-        <div className="max-w-6xl mx-auto px-4 mt-12">
+        <div className="max-w-4xl mx-auto px-4 mt-12">
           <img
-            src="/images/carsini-banner.webp"
-            alt="Carsini Winery vineyard"
-            className="w-full h-96 object-cover rounded-lg shadow-lg"
+            src={carsiniBanner}
+            alt="Carsini Wineries sign on brick wall"
+            className="w-full max-h-[600px] object-contain rounded-lg shadow-lg"
             loading="lazy"
           />
         </div>

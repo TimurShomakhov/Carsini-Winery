@@ -7,7 +7,9 @@ import toast from 'react-hot-toast';
 const Register = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -21,12 +23,16 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/users/register', formData);
-      login(res.data.token);
+      login(res.data.token); // If your backend doesn’t send token, adjust this line
       toast.success('Account created!');
       navigate('/checkout');
     } catch (err) {
-      toast.error('Registration failed');
-      console.error(err);
+      const message =
+        err.response?.data?.error ||
+        err.response?.data?.errors?.[0]?.msg ||
+        'Registration failed';
+      toast.error(message);
+      console.error(err.response?.data || err.message);
     }
   };
 
@@ -45,7 +51,17 @@ const Register = () => {
           </a>
         </p>
 
-        <label className="block mt-6 mb-2 font-medium">Email</label>
+        <label className="block mt-6 mb-2 font-medium">Name</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          className="w-full p-2 mb-4 border border-wine/20 rounded bg-white"
+        />
+
+        <label className="block mb-2 font-medium">Email</label>
         <input
           type="email"
           name="email"
