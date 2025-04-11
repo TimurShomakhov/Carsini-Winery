@@ -11,6 +11,9 @@ const ProductListing = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [category, setCategory] = useState('All');
+  const [priceRange, setPriceRange] = useState([0, 50]);
+  const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,12 +29,36 @@ const ProductListing = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    let results = [...products];
+
+    if (searchQuery) {
+      results = results.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    if (category !== 'All') {
+      results = results.filter((product) => product.category === category);
+    }
+
+    results = results.filter(
+      (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
+
+    if (sortOption === 'low-high') {
+      results.sort((a, b) => a.price - b.price);
+    } else if (sortOption === 'high-low') {
+      results.sort((a, b) => b.price - a.price);
+    } else if (sortOption === 'az') {
+      results.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    setFilteredProducts(results);
+  }, [searchQuery, category, priceRange, sortOption, products]);
+
   const handleSearch = (query) => {
     setSearchQuery(query);
-    const results = products.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredProducts(results);
   };
 
   return (
@@ -43,11 +70,46 @@ const ProductListing = () => {
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-10">Products</h1>
 
-          <div className="mb-6">
+          <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <SearchBar onSearch={handleSearch} />
+
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="p-2 rounded border border-gray-300"
+            >
+              <option value="All">All Categories</option>
+              <option value="Red">Red</option>
+              <option value="White">White</option>
+              <option value="Rosé">Rosé</option>
+              <option value="Sparkling">Sparkling</option>
+              <option value="Dessert">Dessert</option>
+            </select>
+
+            <input
+              type="range"
+              min="0"
+              max="50"
+              step="1"
+              value={priceRange[1]}
+              onChange={(e) => setPriceRange([0, Number(e.target.value)])}
+              className="w-full"
+            />
+            <span className="text-sm text-center">Up to ${priceRange[1]}</span>
+
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="p-2 rounded border border-gray-300"
+            >
+              <option value="">Sort</option>
+              <option value="low-high">Price: Low to High</option>
+              <option value="high-low">Price: High to Low</option>
+              <option value="az">Alphabetical A-Z</option>
+            </select>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
             {filteredProducts.length === 0 ? (
               <p className="text-center col-span-full">No products found</p>
             ) : (

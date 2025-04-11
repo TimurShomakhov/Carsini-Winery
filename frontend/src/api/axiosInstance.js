@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://carsini-backend.onrender.com/api', // 🟢 Your live backend URL
-  withCredentials: true,                               // ✅ Keep this for auth/cookies
+  baseURL: '/api',          // ✅ Local dev will proxy this to http://localhost:5000
+  withCredentials: true,    // ✅ Required if using auth/cookies
 });
 
 export default instance;
