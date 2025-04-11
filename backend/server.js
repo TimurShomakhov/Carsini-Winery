@@ -2,9 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+const path = require("path");
 const apiLimiter = require("./middleware/rateLimiter");
 
-const db = require("./models"); // 🧠 Dynamic import with all models
+const db = require("./models");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
@@ -12,57 +13,72 @@ const reviewRoutes = require("./routes/reviewRoutes");
 
 const app = express();
 
-// ✅ CORS config for local dev
+// ✅ Serve static image files from /public
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
+// ✅ CORS Configuration
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://carsini-frontend.netlify.app",
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
 
 // ✅ Global Middleware
 app.use(helmet());
 app.use(express.json());
 
-// ✅ Rate limiting (optional)
-app.use("/api/orders", apiLimiter);
-app.use("/api/users", apiLimiter);
-
-// ✅ Routes
+// ✅ API Routes
 app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/api/users", apiLimiter, userRoutes);
+app.use("/api/orders", apiLimiter, orderRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-// ✅ Health check route
+// ✅ Health check
 app.get("/", (req, res) => {
   res.send("Welcome to the Carsini Winery API");
 });
 
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, async () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-
+const startServer = async () => {
   try {
+    if (!db || !db.sequelize) {
+      throw new Error("❌ Sequelize not initialized from models/index.js");
+    }
+
     await db.sequelize.authenticate();
     console.log("✅ Database connected successfully.");
 
-    // 🟨 Ensure at least 1 product exists (for foreign key integrity)
-    const count = await db.Product.count();
-    if (count === 0) {
+    const productCount = await db.Product.count();
+    if (productCount === 0) {
       await db.Product.create({
         name: "Starter Wine",
         description: "Default product for testing",
         price: 9.99,
         stock: 100,
-        image: "starter.jpg",
+        image: "/images/starter-wine.webp",
         category: "Red",
       });
       console.log("✅ Dummy product created");
     }
 
-    // ✅ Models auto-synced in models/index.js
-    console.log("✅ All models synced via index.js");
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
   } catch (err) {
-    console.error("❌ Failed to initialize database:", err);
+    console.error("❌ Failed to start server:", err.message);
   }
-});
+};
+
+startServer();

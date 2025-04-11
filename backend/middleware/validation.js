@@ -1,17 +1,24 @@
 const { body } = require('express-validator');
 
+// 🔹 Register validation
+exports.validateRegister = [
+  body('name').isString().trim().notEmpty().withMessage('Name is required'),
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+];
+
+// 🔹 Login validation
+exports.validateLogin = [
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('password').exists().withMessage('Password is required'),
+];
+
 // 🔹 Review validation
 exports.validateReview = [
   body('productId').isInt().withMessage('Product ID must be an integer'),
   body('userId').optional().isInt().withMessage('User ID must be an integer'),
   body('rating').isInt({ min: 1, max: 5 }).withMessage('Rating must be 1-5'),
   body('comment').isString().trim().isLength({ min: 3 }).withMessage('Comment is too short'),
-];
-
-// 🔹 User validation
-exports.validateUser = [
-  body('email').isEmail().withMessage('Valid email is required'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
 ];
 
 // 🔹 Product creation validation
