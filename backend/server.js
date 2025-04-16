@@ -18,8 +18,8 @@ app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // ✅ CORS Configuration
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://carsini-frontend.netlify.app",
+  "http://localhost:5173",                     // Local development
+  "https://carsini-winery.vercel.app",        // ✅ Vercel frontend
 ];
 
 app.use(cors({
@@ -43,9 +43,9 @@ app.use("/api/users", apiLimiter, userRoutes);
 app.use("/api/orders", apiLimiter, orderRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-// ✅ Health check
+// ✅ Health Check Route
 app.get("/", (req, res) => {
-  res.send("Welcome to the Carsini Winery API");
+  res.send("Welcome to the Carsini Winery API 🍷");
 });
 
 // ✅ Start Server
@@ -60,6 +60,7 @@ const startServer = async () => {
     await db.sequelize.authenticate();
     console.log("✅ Database connected successfully.");
 
+    // Optional: Seed one product if none exist
     const productCount = await db.Product.count();
     if (productCount === 0) {
       await db.Product.create({
