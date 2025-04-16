@@ -1,3 +1,4 @@
+// src/pages/ProductDetails.jsx
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -96,26 +97,26 @@ const ProductDetails = () => {
           />
 
           {/* Product Info */}
-          <div>
+          <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
             <p className="text-lg mb-4">{product.description}</p>
             <p className="text-2xl font-semibold text-wine mb-4">
               ${product.price}
             </p>
 
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center justify-center gap-4 mb-6">
               <button
                 onClick={decreaseQty}
                 aria-label={`Decrease quantity of ${product.name}`}
-                className="px-3 py-1 bg-wine/10 rounded hover:bg-wine/20"
+                className="w-10 h-10 bg-black text-white text-xl rounded hover:bg-gray-800 transition"
               >
-                -
+                −
               </button>
-              <span className="text-lg font-medium">{quantity}</span>
+              <span className="text-xl font-semibold">{quantity}</span>
               <button
                 onClick={increaseQty}
                 aria-label={`Increase quantity of ${product.name}`}
-                className="px-3 py-1 bg-wine/10 rounded hover:bg-wine/20"
+                className="w-10 h-10 bg-black text-white text-xl rounded hover:bg-gray-800 transition"
               >
                 +
               </button>
