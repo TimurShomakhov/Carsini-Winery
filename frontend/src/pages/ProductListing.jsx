@@ -70,45 +70,64 @@ const ProductListing = () => {
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-10">Products</h1>
 
-          <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <SearchBar onSearch={handleSearch} />
+          {/* 🔍 FILTER BAR */}
+          <div className="mb-10 bg-white p-6 rounded-lg shadow-md border border-wine/20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+              {/* Search Bar */}
+              <div>
+                <SearchBar onSearch={handleSearch} />
+              </div>
 
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="p-2 rounded border border-gray-300"
-            >
-              <option value="All">All Categories</option>
-              <option value="Red">Red</option>
-              <option value="White">White</option>
-              <option value="Rosé">Rosé</option>
-              <option value="Sparkling">Sparkling</option>
-              <option value="Dessert">Dessert</option>
-            </select>
+              {/* Category Dropdown */}
+              <div>
+                <label className="block text-sm font-medium mb-1">Category</label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full p-2 rounded border border-gray-300"
+                >
+                  <option value="All">All Categories</option>
+                  <option value="Red">Red</option>
+                  <option value="White">White</option>
+                  <option value="Rosé">Rosé</option>
+                  <option value="Sparkling">Sparkling</option>
+                  <option value="Dessert">Dessert</option>
+                </select>
+              </div>
 
-            <input
-              type="range"
-              min="0"
-              max="50"
-              step="1"
-              value={priceRange[1]}
-              onChange={(e) => setPriceRange([0, Number(e.target.value)])}
-              className="w-full"
-            />
-            <span className="text-sm text-center">Up to ${priceRange[1]}</span>
+              {/* Price Range Slider */}
+              <div>
+                <label className="block text-sm font-medium mb-1">Price Range</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="50"
+                  step="1"
+                  value={priceRange[1]}
+                  onChange={(e) => setPriceRange([0, Number(e.target.value)])}
+                  className="w-full accent-wine"
+                />
+                <div className="text-right text-sm mt-1">Up to ${priceRange[1]}</div>
+              </div>
 
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className="p-2 rounded border border-gray-300"
-            >
-              <option value="">Sort</option>
-              <option value="low-high">Price: Low to High</option>
-              <option value="high-low">Price: High to Low</option>
-              <option value="az">Alphabetical A-Z</option>
-            </select>
+              {/* Sort Option */}
+              <div>
+                <label className="block text-sm font-medium mb-1">Sort By</label>
+                <select
+                  value={sortOption}
+                  onChange={(e) => setSortOption(e.target.value)}
+                  className="w-full p-2 rounded border border-gray-300"
+                >
+                  <option value="">None</option>
+                  <option value="low-high">Price: Low to High</option>
+                  <option value="high-low">Price: High to Low</option>
+                  <option value="az">Alphabetical A-Z</option>
+                </select>
+              </div>
+            </div>
           </div>
 
+          {/* 🍷 PRODUCT GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
             {filteredProducts.length === 0 ? (
               <p className="text-center col-span-full">No products found</p>

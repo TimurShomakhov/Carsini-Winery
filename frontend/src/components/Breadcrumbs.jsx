@@ -2,29 +2,41 @@ import { Link, useLocation } from 'react-router-dom'
 
 const Breadcrumbs = () => {
   const location = useLocation()
-  const path = location.pathname.split('/').filter(Boolean)
+  const segments = location.pathname.split('/').filter(Boolean)
 
   return (
-    <nav className="text-sm text-gray-600 mb-6">
-      <Link to="/" className="hover:underline text-blue-600 font-medium">Home</Link>
-      {path.map((segment, index) => {
-        const fullPath = '/' + path.slice(0, index + 1).join('/')
-        const isLast = index === path.length - 1
-        const name = decodeURIComponent(segment).replace(/-/g, ' ')
-
-        return (
-          <span key={index}>
-            {' / '}
-            {isLast ? (
-              <span className="text-gray-800 capitalize">{name}</span>
-            ) : (
-              <Link to={fullPath} className="hover:underline capitalize text-blue-600">
-                {name}
-              </Link>
-            )}
-          </span>
-        )
-      })}
+    <nav className="text-sm px-6 py-4">
+      <ol className="flex space-x-2 text-gray-600">
+        <li>
+          <Link
+            to="/"
+            className="text-blue-600 hover:underline font-medium"
+          >
+            Home
+          </Link>
+        </li>
+        {segments.map((segment, index) => {
+          const path = '/' + segments.slice(0, index + 1).join('/')
+          const isLast = index === segments.length - 1
+          return (
+            <li key={path} className="flex items-center space-x-2">
+              <span className="text-gray-400">/</span>
+              {isLast ? (
+                <span className="text-gray-900 font-semibold capitalize">
+                  {decodeURIComponent(segment)}
+                </span>
+              ) : (
+                <Link
+                  to={path}
+                  className="text-blue-600 hover:underline capitalize"
+                >
+                  {decodeURIComponent(segment)}
+                </Link>
+              )}
+            </li>
+          )
+        })}
+      </ol>
     </nav>
   )
 }

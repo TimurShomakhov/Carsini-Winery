@@ -6,6 +6,7 @@ import axios from '../api/axiosInstance';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
+import toast from 'react-hot-toast';
 
 const Checkout = () => {
   const { cart } = useCart();
@@ -50,12 +51,12 @@ const Checkout = () => {
         }
       );
 
-      alert('Order placed successfully!');
+      toast.success('🎉 Order placed successfully!');
       navigate('/order-confirmation');
       setFormData({ name: '', email: '', address: '' });
     } catch (err) {
       console.error('Order failed:', err);
-      alert('Order submission failed. Please try again.');
+      toast.error('❌ Order submission failed. Please try again.');
     }
   };
 
@@ -75,7 +76,9 @@ const Checkout = () => {
               <ul className="space-y-2">
                 {cart.map((item) => (
                   <li key={item.id} className="flex justify-between">
-                    <span>{item.name} × {item.quantity}</span>
+                    <span>
+                      {item.name} × {item.quantity}
+                    </span>
                     <span>${(item.price * item.quantity).toFixed(2)}</span>
                   </li>
                 ))}
@@ -140,7 +143,7 @@ const Checkout = () => {
             </form>
           </div>
 
-          {/* Optional Stripe checkout integration */}
+          {/* Stripe checkout integration */}
           <div className="mt-10">
             <StripeCheckout totalAmount={totalPrice} />
           </div>

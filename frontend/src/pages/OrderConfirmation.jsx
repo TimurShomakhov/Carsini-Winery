@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
+import bgImage from '../assets/orderconfirmation.jpg';
 
 const OrderConfirmation = () => {
   const { cart } = useCart();
@@ -23,18 +24,24 @@ const OrderConfirmation = () => {
   }, [cart, navigate]);
 
   return (
-    <div className="min-h-screen w-full bg-parchment text-black flex flex-col">
+    <div
+      className="min-h-screen w-full bg-cover bg-center flex flex-col text-white"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <div className="absolute inset-0 bg-black/50 z-0" />
       <Navbar />
       <Breadcrumbs />
 
-      <main className="flex-grow w-full px-4 py-16">
-        <div className="max-w-3xl mx-auto">
+      <main className="flex-grow w-full px-4 py-16 relative z-10">
+        <div className="max-w-3xl mx-auto bg-white/90 text-black p-8 rounded-lg shadow-lg backdrop-blur-md">
           <h1 className="text-4xl font-bold mb-6 text-center">Order Confirmation</h1>
 
           {orderDetails ? (
             <>
               <p className="mb-4 text-center text-lg">Thank you for your order!</p>
-              <p className="mb-6 text-center">Order ID: <strong>{orderDetails.orderId}</strong></p>
+              <p className="mb-6 text-center text-sm">
+                Order ID: <span className="font-bold">#{orderDetails.orderId}</span>
+              </p>
 
               <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
 
@@ -48,15 +55,17 @@ const OrderConfirmation = () => {
                       loading="lazy"
                     />
                     <div className="flex-1">
-                      <p className="font-medium">{item.name}</p>
-                      <p className="text-sm text-gray-600">x {item.quantity}</p>
+                      <p className="font-medium text-lg">{item.name}</p>
+                      <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
                     </div>
-                    <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="font-semibold text-right">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </span>
                   </li>
                 ))}
               </ul>
 
-              <div className="text-right text-xl font-semibold">
+              <div className="text-right text-xl font-bold">
                 Total: ${orderDetails.total.toFixed(2)}
               </div>
             </>
