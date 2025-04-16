@@ -1,9 +1,8 @@
-// src/api/axiosInstance.js
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: '/api',          // ✅ Local dev will proxy this to http://localhost:5000
-  withCredentials: true,    // ✅ Required if using auth/cookies
+const axiosInstance = axios.create({
+  baseURL: 'https://carsini-winery-backend.onrender.com/api', 
+  withCredentials: true, 
 });
 
-export default instance;
+export default axiosInstance;
